@@ -7,12 +7,13 @@
 #
 Name     : unified-memory-framework
 Version  : 0.10.1
-Release  : 1
+Release  : 2
 URL      : https://github.com/oneapi-src/unified-memory-framework/archive/v0.10.1/unified-memory-framework-0.10.1.tar.gz
 Source0  : https://github.com/oneapi-src/unified-memory-framework/archive/v0.10.1/unified-memory-framework-0.10.1.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : Apache-2.0
+Requires: unified-memory-framework-lib = %{version}-%{release}
 Requires: unified-memory-framework-license = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : google-benchmark
@@ -41,6 +42,7 @@ BuildRequires : pkgconfig(valgrind)
 %package dev
 Summary: dev components for the unified-memory-framework package.
 Group: Development
+Requires: unified-memory-framework-lib = %{version}-%{release}
 Provides: unified-memory-framework-devel = %{version}-%{release}
 Requires: unified-memory-framework = %{version}-%{release}
 
@@ -54,6 +56,15 @@ Group: Documentation
 
 %description doc
 doc components for the unified-memory-framework package.
+
+
+%package lib
+Summary: lib components for the unified-memory-framework package.
+Group: Libraries
+Requires: unified-memory-framework-license = %{version}-%{release}
+
+%description lib
+lib components for the unified-memory-framework package.
 
 
 %package license
@@ -73,7 +84,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1742505737
+export SOURCE_DATE_EPOCH=1742506151
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -93,6 +104,7 @@ LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
 export GOAMD64=v2
 %cmake .. -DFETCHCONTENT_FULLY_DISCONNECTED=ON \
 -DUMF_BUILD_CUDA_PROVIDER=OFF \
+-DUMF_BUILD_SHARED_LIBRARY=ON \
 -DUMF_BUILD_TESTS=OFF \
 -DUMF_LEVEL_ZERO_INCLUDE_DIR=/usr/include/level_zero  -G 'Unix Makefiles'
 make  %{?_smp_mflags}
@@ -113,7 +125,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1742505737
+export SOURCE_DATE_EPOCH=1742506151
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/unified-memory-framework
 cp %{_builddir}/unified-memory-framework-%{version}/LICENSE.TXT %{buildroot}/usr/share/package-licenses/unified-memory-framework/64be5dda96ce5bef89d87aec325a52135dc3b6e2 || :
@@ -155,6 +167,8 @@ popd
 /usr/lib64/cmake/umf/umf-config.cmake
 /usr/lib64/cmake/umf/umf-targets-relwithdebinfo.cmake
 /usr/lib64/cmake/umf/umf-targets.cmake
+/usr/lib64/libumf.so
+/usr/lib64/libumf_proxy.so
 
 %files doc
 %defattr(0644,root,root,0755)
@@ -192,6 +206,12 @@ popd
 /usr/share/doc/umf/examples/memspace_numa/CMakeLists.txt
 /usr/share/doc/umf/examples/memspace_numa/memspace_numa.c
 /usr/share/doc/umf/licensing/third-party-programs.txt
+
+%files lib
+%defattr(-,root,root,-)
+/usr/lib64/libumf.so.0
+/usr/lib64/libumf.so.0.0.0
+/usr/lib64/libumf_proxy.so.0
 
 %files license
 %defattr(0644,root,root,0755)
