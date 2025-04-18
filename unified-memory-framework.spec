@@ -7,10 +7,10 @@
 #
 %define keepstatic 1
 Name     : unified-memory-framework
-Version  : 0.10.1
-Release  : 4
-URL      : https://github.com/oneapi-src/unified-memory-framework/archive/v0.10.1/unified-memory-framework-0.10.1.tar.gz
-Source0  : https://github.com/oneapi-src/unified-memory-framework/archive/v0.10.1/unified-memory-framework-0.10.1.tar.gz
+Version  : 0.11.0
+Release  : 5
+URL      : https://github.com/oneapi-src/unified-memory-framework/archive/v0.11.0/unified-memory-framework-0.11.0.tar.gz
+Source0  : https://github.com/oneapi-src/unified-memory-framework/archive/v0.11.0/unified-memory-framework-0.11.0.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : Apache-2.0
@@ -26,6 +26,7 @@ BuildRequires : pkgconfig(level-zero)
 BuildRequires : pkgconfig(numa)
 BuildRequires : pkgconfig(tbb)
 BuildRequires : pkgconfig(valgrind)
+BuildRequires : python3-dev
 # Suppress stripping binaries
 %define __strip /bin/true
 %define debug_package %{nil}
@@ -76,25 +77,16 @@ Group: Default
 license components for the unified-memory-framework package.
 
 
-%package staticdev
-Summary: staticdev components for the unified-memory-framework package.
-Group: Default
-Requires: unified-memory-framework-dev = %{version}-%{release}
-
-%description staticdev
-staticdev components for the unified-memory-framework package.
-
-
 %prep
-%setup -q -n unified-memory-framework-0.10.1
-cd %{_builddir}/unified-memory-framework-0.10.1
+%setup -q -n unified-memory-framework-0.11.0
+cd %{_builddir}/unified-memory-framework-0.11.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1744762916
+export SOURCE_DATE_EPOCH=1744989809
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -138,7 +130,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1744762916
+export SOURCE_DATE_EPOCH=1744989809
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/unified-memory-framework
 cp %{_builddir}/unified-memory-framework-%{version}/LICENSE.TXT %{buildroot}/usr/share/package-licenses/unified-memory-framework/64be5dda96ce5bef89d87aec325a52135dc3b6e2 || :
@@ -169,10 +161,10 @@ popd
 /usr/include/umf/pools/pool_jemalloc.h
 /usr/include/umf/pools/pool_proxy.h
 /usr/include/umf/pools/pool_scalable.h
-/usr/include/umf/providers/provider_coarse.h
 /usr/include/umf/providers/provider_cuda.h
 /usr/include/umf/providers/provider_devdax_memory.h
 /usr/include/umf/providers/provider_file_memory.h
+/usr/include/umf/providers/provider_fixed_memory.h
 /usr/include/umf/providers/provider_level_zero.h
 /usr/include/umf/providers/provider_os_memory.h
 /usr/include/umf/proxy_lib_new_delete.h
@@ -230,7 +222,3 @@ popd
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/unified-memory-framework/64be5dda96ce5bef89d87aec325a52135dc3b6e2
 /usr/share/package-licenses/unified-memory-framework/9de68a35905bcadf7bc3916654fb5f7a2b717d68
-
-%files staticdev
-%defattr(-,root,root,-)
-/usr/lib64/libdisjoint_pool.a
