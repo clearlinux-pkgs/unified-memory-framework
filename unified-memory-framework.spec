@@ -7,10 +7,10 @@
 #
 %define keepstatic 1
 Name     : unified-memory-framework
-Version  : 0.11.1
-Release  : 6
-URL      : https://github.com/oneapi-src/unified-memory-framework/archive/v0.11.1/unified-memory-framework-0.11.1.tar.gz
-Source0  : https://github.com/oneapi-src/unified-memory-framework/archive/v0.11.1/unified-memory-framework-0.11.1.tar.gz
+Version  : 0.11.2
+Release  : 7
+URL      : https://github.com/oneapi-src/unified-memory-framework/archive/v0.11.2/unified-memory-framework-0.11.2.tar.gz
+Source0  : https://github.com/oneapi-src/unified-memory-framework/archive/v0.11.2/unified-memory-framework-0.11.2.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : Apache-2.0
@@ -78,15 +78,15 @@ license components for the unified-memory-framework package.
 
 
 %prep
-%setup -q -n unified-memory-framework-0.11.1
-cd %{_builddir}/unified-memory-framework-0.11.1
+%setup -q -n unified-memory-framework-0.11.2
+cd %{_builddir}/unified-memory-framework-0.11.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1746713370
+export SOURCE_DATE_EPOCH=1747058741
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -130,7 +130,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1746713370
+export SOURCE_DATE_EPOCH=1747058741
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/unified-memory-framework
 cp %{_builddir}/unified-memory-framework-%{version}/LICENSE.TXT %{buildroot}/usr/share/package-licenses/unified-memory-framework/64be5dda96ce5bef89d87aec325a52135dc3b6e2 || :
