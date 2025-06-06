@@ -1,5 +1,6 @@
 libumf.so.0:UMF_0.10
 libumf.so.0:UMF_0.11
+libumf.so.0:UMF_0.12
 libumf.so.0:umfCUDAMemoryProviderOps
 libumf.so.0:umfCUDAMemoryProviderParamsCreate
 libumf.so.0:umfCUDAMemoryProviderParamsDestroy
@@ -8,6 +9,9 @@ libumf.so.0:umfCUDAMemoryProviderParamsSetContext
 libumf.so.0:umfCUDAMemoryProviderParamsSetDevice
 libumf.so.0:umfCUDAMemoryProviderParamsSetMemoryType
 libumf.so.0:umfCloseIPCHandle
+libumf.so.0:umfCtlExec
+libumf.so.0:umfCtlGet
+libumf.so.0:umfCtlSet
 libumf.so.0:umfDevDaxMemoryProviderOps
 libumf.so.0:umfDevDaxMemoryProviderParamsCreate
 libumf.so.0:umfDevDaxMemoryProviderParamsDestroy
@@ -40,6 +44,9 @@ libumf.so.0:umfGetIPCHandle
 libumf.so.0:umfGetLastFailedMemoryProvider
 libumf.so.0:umfInit
 libumf.so.0:umfJemallocPoolOps
+libumf.so.0:umfJemallocPoolParamsCreate
+libumf.so.0:umfJemallocPoolParamsDestroy
+libumf.so.0:umfJemallocPoolParamsSetNumArenas
 libumf.so.0:umfLevelZeroMemoryProviderOps
 libumf.so.0:umfLevelZeroMemoryProviderParamsCreate
 libumf.so.0:umfLevelZeroMemoryProviderParamsDestroy
@@ -67,7 +74,6 @@ libumf.so.0:umfMemoryProviderOpenIPCHandle
 libumf.so.0:umfMemoryProviderPurgeForce
 libumf.so.0:umfMemoryProviderPurgeLazy
 libumf.so.0:umfMemoryProviderPutIPCHandle
-libumf.so.0:umfMemoryTrackerGetAllocInfo
 libumf.so.0:umfMempolicyCreate
 libumf.so.0:umfMempolicyDestroy
 libumf.so.0:umfMempolicySetCustomSplitPartitions
